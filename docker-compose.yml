@@ -5,9 +5,9 @@ services:
     image: postgres:latest
     container_name: postgres-db
     environment:
-      POSTGRES_DB: instagram  # Your database name (from .env file)
-      POSTGRES_USER: pallavi  # Your username (from .env file)
-      POSTGRES_PASSWORD: Aarna9597$  # Your password (from .env file)
+      POSTGRES_DB: instagram
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Aarna9597$
 #    volumes:
 #      - postgres_data:/var/lib/postgresql/data
     ports:
