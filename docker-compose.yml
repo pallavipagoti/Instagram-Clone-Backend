@@ -6,8 +6,8 @@ services:
     container_name: postgres-db
     environment:
       POSTGRES_DB: instagram
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Aarna9597$
+      POSTGRES_USER: pallavi
+      POSTGRES_PASSWORD: Aarna
 #    volumes:
 #      - postgres_data:/var/lib/postgresql/data
     ports:
