@@ -1,0 +1,35 @@
+services:
+  # Web service (Instagram Clone Application)
+  - type: web
+    name: instagram-clone
+    env: java
+    build:
+      dockerfilePath: Dockerfile  # Ensure you have a Dockerfile in your project directory
+    plan: free  # You can adjust the plan (free, starter, pro, etc.) based on your needs
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: "jdbc:postgresql://{{ postgres-db.host }}:5432/instagram"
+      - key: SPRING_DATASOURCE_USERNAME
+        value: "pallavi"
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: "Aarna"
+      - key: APP_API_KEY
+        value: "mysecretkeywillneverberevealed1234567891011121314151617181920"
+    healthCheckPath: "/health"  # Optional: Define a health check endpoint
+    autoDeploy: true
+    buildCommand: "mvn clean package"  # Adjust if you use Maven or Gradle
+    startCommand: "java -jar target/instagram-clone.jar"  # Adjust this if needed
+
+  # Database service (PostgreSQL)
+  - type: postgres
+    name: postgres-db
+    plan: free  # Adjust the plan (free, starter, pro, etc.)
+    envVars:
+      - key: POSTGRES_DB
+        value: "instagram"
+      - key: POSTGRES_USER
+        value: "pallavi"
+      - key: POSTGRES_PASSWORD
+        value: "Aarna"
+
+# Optional: Define other configurations if needed
