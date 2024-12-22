@@ -6,7 +6,7 @@ services:
     container_name: postgres-db
     environment:
       POSTGRES_DB: instagram  # Your database name (from .env file)
-      POSTGRES_USER: postgres  # Your username (from .env file)
+      POSTGRES_USER: pallavi  # Your username (from .env file)
       POSTGRES_PASSWORD: Aarna9597$  # Your password (from .env file)
 #    volumes:
 #      - postgres_data:/var/lib/postgresql/data
@@ -20,13 +20,13 @@ services:
     build:
       context: .
     container_name: instagram-clone
-#    env_file:
-#      - .env
-    environment:
-      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-      APP_API_KEY: ${APP_API_KEY}
+    env_file:
+      - .env
+#    environment:
+#      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+#      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+#      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+#      APP_API_KEY: ${APP_API_KEY}
 #      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/instagram
 #      SPRING_DATASOURCE_USERNAME: postgres
 #      SPRING_DATASOURCE_PASSWORD: Aarna9597$
