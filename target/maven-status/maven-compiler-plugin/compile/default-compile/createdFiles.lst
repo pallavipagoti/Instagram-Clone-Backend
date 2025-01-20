@@ -1,4 +1,5 @@
 com\palla\Insta_Clone\Exceptions\ErrorDetails.class
+com\palla\Insta_Clone\Config\AppConfig$1.class
 com\palla\Insta_Clone\Config\JwtTokenValidationFilter.class
 com\palla\Insta_Clone\Service\StoryServiceImpl.class
 com\palla\Insta_Clone\Config\SecurityContext.class

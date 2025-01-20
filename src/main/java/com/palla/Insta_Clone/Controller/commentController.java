@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/comments")
 public class commentController {
@@ -31,8 +33,8 @@ public class commentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Comment> findCommentByIdHandler(@PathVariable Integer id) throws CommentException {
-        Comment comment=service.findCommentById(id);
+    public ResponseEntity<List<Comment>> findCommentByIdHandler(@PathVariable Integer id) throws CommentException {
+        List<Comment> comment=service.findCommentById(id);
         return new ResponseEntity<>(comment,HttpStatus.OK);
 
     }

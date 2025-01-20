@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -49,42 +50,55 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public Comment findCommentById(Integer commentId) throws CommentException {
+    public List<Comment> findCommentById(Integer postId) throws CommentException {
 
-        Optional<Comment> comment=repo.findById(commentId);
-        if(comment.isPresent()){
-            return comment.get();
+        Optional<Post> post=postRepo.findById(postId);
+        if(post.isPresent()){
+            return post.get().getComments();
         }
-        throw new CommentException("No comment with Id: "+ commentId);
+        throw new CommentException("No comment with Id: "+ postId);
     }
 
     @Override
     public Comment likeComment(Integer commentId, Integer userId) throws CommentException, UserException {
 
         User user= userService.findUserById(userId);
-        Comment comment=findCommentById(commentId);
-        UserDto userdto=new UserDto();
-        userdto.setId(user.getId());
-        userdto.setUsername(user.getUsername());
-        userdto.setEmail(user.getEmail());
-        userdto.setName(user.getName());
-        userdto.setUserImage(user.getImage());
-        comment.getLikedByUsers().add(userdto);
-        return repo.save(comment);
+        Optional<Comment> commentopt=repo.findById(commentId);
+        if(commentopt.isPresent()){
+            Comment comment=commentopt.get();
+            UserDto userdto=new UserDto();
+            userdto.setId(user.getId());
+            userdto.setUsername(user.getUsername());
+            userdto.setEmail(user.getEmail());
+            userdto.setName(user.getName());
+            userdto.setUserImage(user.getImage());
+            comment.getLikedByUsers().add(userdto);
+            return repo.save(comment);
+        }
+
+        throw new CommentException("No comment with Id: "+ commentId);
+
+
     }
 
     @Override
     public Comment unLikeComment(Integer commentId, Integer userId) throws CommentException, UserException {
         User user= userService.findUserById(userId);
-        Comment comment=findCommentById(commentId);
-        UserDto userdto=new UserDto();
-        userdto.setId(user.getId());
-        userdto.setUsername(user.getUsername());
-        userdto.setEmail(user.getEmail());
-        userdto.setName(user.getName());
-        userdto.setUserImage(user.getImage());
+        Optional<Comment> commentopt=repo.findById(commentId);
+        if(commentopt.isPresent()){
+            Comment comment=commentopt.get();
+            UserDto userdto=new UserDto();
+            userdto.setId(user.getId());
+            userdto.setUsername(user.getUsername());
+            userdto.setEmail(user.getEmail());
+            userdto.setName(user.getName());
+            userdto.setUserImage(user.getImage());
+            comment.getLikedByUsers().remove(userdto);
+            return repo.save(comment);
 
-        comment.getLikedByUsers().remove(userdto);
-        return repo.save(comment);
+        }
+        throw new CommentException("No comment with Id: "+ commentId);
+
+
     }
 }

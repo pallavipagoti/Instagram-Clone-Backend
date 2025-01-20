@@ -5,10 +5,12 @@ import com.palla.Insta_Clone.Exceptions.PostException;
 import com.palla.Insta_Clone.Exceptions.UserException;
 import com.palla.Insta_Clone.Model.Comment;
 
+import java.util.List;
+
 public interface CommentService {
 
     public Comment createComment(Comment comment,Integer postId,Integer userId) throws UserException, PostException;
-    public Comment findCommentById(Integer commentId) throws CommentException;
+    public List<Comment> findCommentById(Integer commentId) throws CommentException;
     public Comment likeComment(Integer commentId,Integer userId) throws CommentException,UserException;
     public Comment unLikeComment(Integer commentId,Integer userId) throws CommentException,UserException;
 
