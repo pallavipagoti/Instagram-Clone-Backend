@@ -32,6 +32,7 @@ public class AppConfig {
     public SecurityFilterChain securityConfiguration(HttpSecurity http) throws Exception{
         http.csrf(customizer->customizer.disable())
                 .authorizeHttpRequests((request->request.requestMatchers(HttpMethod.POST, "/signup").permitAll().anyRequest().authenticated()))
+                .authorizeHttpRequests((request->request.requestMatchers(HttpMethod.GET, "/spin").permitAll().anyRequest().authenticated()))
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtTokenValidationFilter, BasicAuthenticationFilter.class)

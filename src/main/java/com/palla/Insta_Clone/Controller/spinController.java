@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class spinController {
+
     @GetMapping("/spin")
     public ResponseEntity<String> spin() {
         return new ResponseEntity<>("server started",HttpStatus.OK);
