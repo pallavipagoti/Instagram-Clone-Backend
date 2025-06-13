@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
         if(opt.isPresent()){
             return opt.get();
         }
-        throw new UserException("user not exist with id: "+username);
+        throw new UserException("user not exist with username: "+username);
     }
 
     public String followUser(Integer regUserId, Integer followUserId) throws UserException {
